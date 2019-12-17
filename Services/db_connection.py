@@ -1,9 +1,9 @@
 import configuration as cfg
-import sqlalchemy as sa
+import sqlalchemy as db
 from urllib.parse import quote_plus
 
-params = quote_plus(cfg.db_config['connection_string'])
-engine = sa.create_engine('mssql+pyodbc:///?odbc_connect=%s' % params)
-
+params = cfg.db_config['connection_string']
+engine = db.create_engine('mssql+pyodbc://%s' % params)
+connection = engine.connect()
 
 
