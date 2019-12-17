@@ -1,12 +1,12 @@
-from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy import Column, Integer, String, DateTime, MetaData
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 
-Base = declarative_base()
+Base = declarative_base(metadata=MetaData(schema='players'))
 
 
 class User(Base):
-    __tablename__ = 'players.AUsers'
+    __tablename__ = 'AUsers'
 
     Id = Column(String, primary_key=True)
     Weight = Column(Integer)
@@ -14,8 +14,7 @@ class User(Base):
     City = Column(String)
     DateOfBirth = Column(DateTime)
     UserType = Column(Integer)
-    UserBadges = relationship("AUserBadges", schema="players", back_populates="AUsers")
-    PersonalStatistics = relationship("APersonalStatistics", schema="players", back_populates="AUsers")
+    UserBadges = relationship("AUserBadges", back_populates="AUsers")
 
     def __repr__(self):
         return "<User(Id='%s', Wight='%s', DateOfBirth='%s', City='%s'>" \
