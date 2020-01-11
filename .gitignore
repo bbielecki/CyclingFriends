@@ -1,3 +1,22 @@
 env
 __pycache__
 .vscode
+
+# NuGet Packages
+*.nupkg
+# The packages folder can be ignored because of Package Restore
+**/packages/*
+# except build/, which is used as an MSBuild target.
+!**/packages/build/
+#!**/packages/repositories.config
+# NuGet v3's project.json files produces more ignoreable files
+*.nuget.props
+*.nuget.targets
+
+
+# node.js
+#
+node_modules/
+npm-debug.log
+yarn-error.log
+cache
