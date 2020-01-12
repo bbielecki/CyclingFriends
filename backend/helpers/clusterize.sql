@@ -7,8 +7,8 @@ create table rides.Clusters (
 	constraint PK_Clusters primary key (Id)
 )
 
-select count(Id) from rides.Clusters
 delete from rides.Clusters
+select count(Id) from rides.Clusters
 
   declare @maxLat float = 54.728265;
   declare @minLat float = 54.238511;
@@ -22,8 +22,8 @@ delete from rides.Clusters
 
   declare @currentMinLat float = @minLat;
   declare @currentMinLng float = @minLng;
-  declare @currentMaxLat float = @maxLat + @latStep;
-  declare @currentMaxLng float = @maxLng + @lngStep;
+  declare @currentMaxLat float = @minLat + @latStep;
+  declare @currentMaxLng float = @minLng + @lngStep;
   declare @i integer = 0;
 
     -- init table
@@ -47,8 +47,8 @@ delete from rides.Clusters
   -- create clusters
   set @currentMinLat = @minLat;
   set @currentMinLng = @minLng;
-  set @currentMaxLat = @maxLat + @latStep;
-  set @currentMaxLng = @maxLng + @lngStep;
+  set @currentMaxLat = @minLat + @latStep;
+  set @currentMaxLng = @minLng + @lngStep;
   set @i = 0;
 
   while @currentMinLat < @maxLat
@@ -84,6 +84,8 @@ delete from rides.Clusters
 	constraint FK_ClusteredRides_Rides foreign key (RideId) references rides.ARides(Id)
 )
 
+select count(Id) from rides.CluseteredRides
+delete from rides.CluseteredRides
 
   --clusterize rides
   declare @j integer = 0;
@@ -113,4 +115,7 @@ delete from rides.Clusters
 		select * from ridesEnd
 	)
 	insert into rides.CluseteredRides select NEWID(), @j, RideId, Lat, Lng, Start from rides;
+	print @j
+
+	set @j = @j + 1;
   end;
