@@ -51246,11 +51246,20 @@ var App = function App() {
     attribution: "\xA9 <a href=\"http://osm.org/copyright\">OpenStreetMap</a> contributors",
     url: "https://{s}.tile.osm.org/{z}/{x}/{y}.png"
   }), rides.map(function (marker, index) {
-    return React.createElement(react_leaflet_1.CircleMarker, {
+    return React.createElement(React.Fragment, null, React.createElement(react_leaflet_1.CircleMarker, {
       key: index,
-      center: [marker[1], marker[2]],
+      center: [marker.StartLocation_Latitude, marker.StartLocation_Longitude],
       radius: 2
-    }, React.createElement(react_leaflet_1.Popup, null, marker[0]));
+    }, React.createElement(react_leaflet_1.Popup, null, marker.Id)), React.createElement(react_leaflet_1.CircleMarker, {
+      key: index,
+      center: [marker.EndLocation_Latitude, marker.EndLocation_Longitude],
+      radius: 2,
+      color: "red"
+    }, React.createElement(react_leaflet_1.Popup, null, marker.Id)), React.createElement(react_leaflet_1.Polyline, {
+      positions: [[marker.StartLocation_Latitude, marker.StartLocation_Longitude], [marker.EndLocation_Latitude, marker.EndLocation_Longitude]],
+      color: "blue",
+      weight: 1
+    }), ">");
   }));
 };
 
@@ -51283,7 +51292,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44179" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57425" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
