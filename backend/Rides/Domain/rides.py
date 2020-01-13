@@ -1,7 +1,8 @@
-from sqlalchemy import Column, Integer, String, Float, MetaData
+from sqlalchemy import Column, String, Float, MetaData
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base(metadata=MetaData(schema='rides'))
+
 
 class Rides(Base):
     __tablename__ = "ARides"

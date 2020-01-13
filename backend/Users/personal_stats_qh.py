@@ -1,5 +1,5 @@
-from Users.DataAccess.users_db_context import Session
-from Users.Domain.personal_statistics import PersonalStatistics
+from backend.Users.DataAccess.users_db_context import Session
+from backend.Users.Domain.personal_statistics import PersonalStatistics
 
 session = Session()
 

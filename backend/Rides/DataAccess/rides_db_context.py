@@ -1,4 +1,4 @@
-import Services.db_connection as connection
+import backend.Services.db_connection as connection
 from sqlalchemy.orm import sessionmaker
 
 db = connection.db

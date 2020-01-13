@@ -1,9 +1,9 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
 
-import Users.users_qh as users
-import Users.personal_stats_qh as personal_stats
-import Rides.rides_qh as rides
+import backend.Users.users_qh as users
+import backend.Users.personal_stats_qh as personal_stats
+import backend.Rides.rides_qh as rides
 
 app = Flask(__name__)
 CORS(app)
