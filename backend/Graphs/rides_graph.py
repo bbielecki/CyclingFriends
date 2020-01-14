@@ -10,9 +10,9 @@ class RidesGraph:
         self.G = nx.Graph()
 
     def create_rides_graph(self, session):
-        nodes = session.query(ClusteredRides)
+        nodes = session.query(ClusteredRides.ClusterId, ClusteredRides.RelatedClusterId, ClusteredRides.RideId, ClusteredRides.Id)
         for n in nodes:
-            self.G.add_edge(n.CluserId, n.RelatedClusterId, rideId=n.RideId)
+            self.G.add_edge(n.ClusterId, n.RelatedClusterId, rideId=n.RideId, clusteredRideId=n.Id)
 
         return self.G
 

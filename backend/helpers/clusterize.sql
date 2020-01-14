@@ -123,6 +123,6 @@ delete from rides.CluseteredRides
 
 
   merge into rides.ClusteredRides cr1
-  using rides.ClusteredRides cr2 on cr1.RideId = cr2.RideId and cr1.ClusterId != cr2.ClusterId
+  using rides.ClusteredRides cr2 on cr1.RideId = cr2.RideId and cr1.Start != cr2.Start
   WHEN MATCHED THEN
 	update set RelatedClusterId = cr2.ClusterId;
