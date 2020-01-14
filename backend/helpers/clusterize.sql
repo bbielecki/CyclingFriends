@@ -75,6 +75,7 @@ select count(Id) from rides.Clusters
   create table rides.CluseteredRides (
     Id uniqueidentifier not null,
 	ClusterId integer not null,
+	RelatedClusterId integer not null,
 	RideId uniqueidentifier not null,
 	Lat float not null,
 	Lng float not null,
@@ -114,8 +115,14 @@ delete from rides.CluseteredRides
 		union
 		select * from ridesEnd
 	)
-	insert into rides.CluseteredRides select NEWID(), @j, RideId, Lat, Lng, Start from rides;
+	insert into rides.CluseteredRides select NEWID(), @j, -1, RideId, Lat, Lng, Start from rides;
 	print @j
 
 	set @j = @j + 1;
   end;
+
+
+  merge into rides.ClusteredRides cr1
+  using rides.ClusteredRides cr2 on cr1.RideId = cr2.RideId and cr1.ClusterId != cr2.ClusterId
+  WHEN MATCHED THEN
+	update set RelatedClusterId = cr2.ClusterId;

@@ -14,7 +14,7 @@ class User(Base):
     City = Column(String)
     DateOfBirth = Column(DateTime)
     UserType = Column(Integer)
-    UserBadges = relationship("AUserBadges", back_populates="AUsers")
+    # UserBadges = relationship("AUserBadges", back_populates="AUsers")
 
     def __repr__(self):
         return "<User(Id='%s', Wight='%s', DateOfBirth='%s', City='%s'>" \

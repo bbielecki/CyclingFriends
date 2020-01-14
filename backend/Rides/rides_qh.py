@@ -4,8 +4,13 @@ from backend.Rides.Domain.rides import Rides
 session = Session()
 
 
-def get_rides():
-    rides = session.query(Rides.Id, Rides.StartLocation_Latitude, Rides.StartLocation_Longitude, Rides.EndLocation_Latitude, Rides.EndLocation_Longitude).limit(limit=100)
+def get_rides(limit: int = None):
+    rides = session.query(Rides.Id, Rides.StartLocation_Latitude, Rides.StartLocation_Longitude, Rides.EndLocation_Latitude, Rides.EndLocation_Longitude)
+    if limit is not None:
+        rides = rides.limit(limit=limit)
+    else:
+        rides = rides.all()
+
     res = []
     for r in rides:
         ride = {
