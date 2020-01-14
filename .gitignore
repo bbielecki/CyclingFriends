@@ -1,6 +1,9 @@
-env
+env/
+.env    
 __pycache__
 .vscode
+.cache
+dist/
 
 # NuGet Packages
 *.nupkg
