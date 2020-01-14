@@ -43,3 +43,6 @@ GO
 RECONFIGURE ;  
 GO
 
+-------- connection strings ---------------
+
+linux: sa:Passw12#@127.0.0.1/activy_anonimized?driver=ODBC+Driver+17+for+SQL+Server
