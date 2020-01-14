@@ -16,4 +16,4 @@ class ClusteredRides(Base):
     Lng = Column(Float)
     Start = Column(Binary)
 
-    Ride = relationship("Rides", foreign_key=[RideId])
+    Ride = relationship("Rides", foreign_keys=[RideId])
