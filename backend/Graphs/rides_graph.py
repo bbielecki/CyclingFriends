@@ -1,6 +1,6 @@
 import networkx as nx
-from backend.Rides.DataAccess.rides_db_context import Session
-from backend.Rides.Domain.clustered_rides import ClusteredRides
+from Rides.DataAccess.rides_db_context import Session
+from Rides.Domain.clustered_rides import ClusteredRides
 
 
 class RidesGraph:

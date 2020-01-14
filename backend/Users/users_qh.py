@@ -1,5 +1,5 @@
-from backend.Users.DataAccess.users_db_context import Session
-from backend.Users.Domain.user import User
+from Users.DataAccess.users_db_context import Session
+from Users.Domain.user import User
 
 session = Session()
 

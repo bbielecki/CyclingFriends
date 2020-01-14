@@ -1,4 +1,4 @@
-import backend.configuration as cfg
+import configuration as cfg
 import sqlalchemy as db
 from urllib.parse import quote_plus
 

@@ -1,5 +1,5 @@
-from backend.Rides.DataAccess.rides_db_context import Session
-from backend.Rides.Domain.rides import Rides
+from Rides.DataAccess.rides_db_context import Session
+from Rides.Domain.rides import Rides
 
 session = Session()
 

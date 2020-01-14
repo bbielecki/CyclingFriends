@@ -1,7 +1,9 @@
-env
+env/
+.env    
 __pycache__
 .vscode
-backend/configuration.py
+.cache
+dist/
 
 # NuGet Packages
 *.nupkg
