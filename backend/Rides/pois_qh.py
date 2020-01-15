@@ -8,7 +8,7 @@ session = Session()
 
 
 def add_poi(poi: Pois):
-    res = session.add(poi)
+    session.add(poi)
     session.commit()
 
 
