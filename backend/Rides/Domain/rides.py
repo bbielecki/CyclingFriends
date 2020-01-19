@@ -9,10 +9,10 @@ class Rides(Base):
     __tablename__ = "ARides"
 
     Id = Column(String, primary_key=True)
-    PlayerId = Column(String, ForeignKey("AUsers.Id"))
+    PlayerId = Column(String)
     StartLocation_Longitude = Column(Float)
     StartLocation_Latitude = Column(Float)
     EndLocation_Longitude = Column(Float)
     EndLocation_Latitude = Column(Float)
 
-    Players = relationship("User", foreign_keys=[PlayerId])
+    # Players = relationship("Player", foreign_keys=[PlayerId])

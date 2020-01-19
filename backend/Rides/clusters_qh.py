@@ -4,11 +4,14 @@ from Rides.Domain.clusters import Clusters
 session = Session()
 
 
-def get_clusters(limit: int = None):
+def get_clusters(skip: int = None, limit: int = None):
     clusters = session.query(Clusters.Id, Clusters.MinLat,
-                             Clusters.MinLng, Clusters.MaxLat, Clusters.MaxLng)
+                             Clusters.MinLng, Clusters.MaxLat, Clusters.MaxLng).order_by(Clusters.Id)
+
     if limit is not None:
         clusters = clusters.limit(limit=limit)
+    if skip is not None:
+        clusters = clusters.offset(offset=skip)
     else:
         clusters = clusters.all()
 
@@ -25,8 +28,8 @@ def get_clusters(limit: int = None):
     return res
 
 
-def get_clusters_center(limit: int = None):
-    clusters = get_clusters(limit)
+def get_clusters_center(skip: int = None, limit: int = None):
+    clusters = get_clusters(skip, limit)
 
     res = []
     for c in clusters:

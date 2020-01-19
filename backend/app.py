@@ -1,12 +1,12 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
 
-# import Users.users_qh as users
-# import Users.personal_stats_qh as personal_stats
-# import Rides.rides_qh as rides
-# import Graphs.rides_graph as rides_graph
-
+import Users.users_qh as users
+import Users.personal_stats_qh as personal_stats
+import Rides.rides_qh as rides
+import Graphs.rides_graph as rides_graph
 import Rides.pois_qh as pois
+import Graphs.rides_graph_stats as stats
 
 app = Flask(__name__)
 CORS(app)
@@ -14,7 +14,8 @@ CORS(app)
 
 @app.route('/')
 def hello_world():
-    pois.add_pois()
+    # pois.add_pois(3928, 10000)
+    stats.get_stats()
     return 'Hello World!'
 
 

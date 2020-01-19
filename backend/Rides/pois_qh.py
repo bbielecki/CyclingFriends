@@ -12,8 +12,8 @@ def add_poi(poi: Pois):
     session.commit()
 
 
-def add_pois():
-    clusterCenters = clusters.get_clusters_center()
+def add_pois(skip: int = None, limit: int = None):
+    clusterCenters = clusters.get_clusters_center(skip, limit)
     for cc in clusterCenters:
         poi = (get_poi(cc['centerLat'],
                        cc['centerLng'], 250, 1))
