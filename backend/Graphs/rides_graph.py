@@ -135,8 +135,8 @@ class RidesGraph:
                 )
 
         print("User & Rides bipartite Graph creation time: ", datetime.now() - timestamp)
-        print(self.G.number_of_nodes())
-        print(self.G.number_of_edges())
+        print("Number of nodes: {0}".format(self.G.number_of_nodes()))
+        print("Number of edges: {0}".format(self.G.number_of_edges()))
         return self.G
 
 
