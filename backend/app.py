@@ -7,6 +7,7 @@ import Rides.rides_qh as rides
 import Graphs.rides_graph as rides_graph
 import Rides.pois_qh as pois
 import Graphs.rides_graph_stats as stats
+import Graphs.rides_users_bipartite_graph_stats as bipartite
 
 app = Flask(__name__)
 CORS(app)
@@ -17,6 +18,8 @@ def hello_world():
     # pois.add_pois(3928, 10000)
     stats.get_stats()
     # print(pois.get_pois(10))
+    # stats.get_stats()
+    bipartite.multiply_graph_nodes()
     return 'Hello World!'
 
 

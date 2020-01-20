@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime, MetaData, Binary
+from sqlalchemy import Column, Integer, String, DateTime, MetaData, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 
@@ -15,7 +15,7 @@ class User(Base):
     DateOfBirth = Column(DateTime)
     UserType = Column(Integer)
     Gender = Column(Integer)
-    HasGarmin = Column(Binary)
+    HasGarmin = Column(Boolean)
     # UserBadges = relationship("AUserBadges", back_populates="AUsers")
 
     def __repr__(self):
