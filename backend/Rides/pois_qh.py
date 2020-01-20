@@ -21,3 +21,24 @@ def add_pois(skip: int = None, limit: int = None):
             new_poi = Pois(ClusterId=cc['ClusterId'],
                            Lat=poi[0].lat(), Lng=poi[0].lon(), Tags=json.dumps(poi[0].tags()))
             add_poi(new_poi)
+
+
+def get_pois(limit: int = None):
+    pois = session.query(Pois.Id, Pois.ClusterId,
+                         Pois.Lat, Pois.Lng, Pois.Tags)
+    if limit is not None:
+        pois = pois.limit(limit=limit)
+    else:
+        pois = pois.all()
+
+    res = []
+    for p in pois:
+        poi = {
+            'Id': p[0],
+            'ClusterId': p[1],
+            'Lat': p[2],
+            'Lng': p[3],
+            'Tags': p[4],
+        }
+        res.append(poi)
+    return res

@@ -16,6 +16,7 @@ CORS(app)
 def hello_world():
     # pois.add_pois(3928, 10000)
     stats.get_stats()
+    # print(pois.get_pois(10))
     return 'Hello World!'
 
 
@@ -28,6 +29,12 @@ def get_rides():
 @app.route('/rides/graph')
 def get_rides_graph():
     res = rides_graph.get_rides_graph()
+    return jsonify(res)
+
+
+@app.route('/pois', )
+def get_pois():
+    res = pois.get_pois()
     return jsonify(res)
 
 
