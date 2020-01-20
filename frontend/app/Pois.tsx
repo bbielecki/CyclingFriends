@@ -6,7 +6,7 @@ import { BASE } from './App'
 
 
 export const Pois: React.FC<{}> = () => {
-    const data = useData(BASE + 'pois')
+    const { data } = useData(BASE + 'pois')
     return data.map((marker, index) => (
         <>
             <CircleMarker key={index}

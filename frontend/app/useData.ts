@@ -16,5 +16,5 @@ export const useData = (url: string) => {
         }
     }, [url]);
 
-    return data
+    return { data }
 } 

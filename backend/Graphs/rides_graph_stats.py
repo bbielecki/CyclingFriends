@@ -127,9 +127,28 @@ def get_average_neighbor_degree(graph):
     return nx.average_neighbor_degree(graph)
 
 
+def get_nodes_rank(graph):
+    poi_nodes = [n
+                 for n, d in graph.nodes(data=True) if d['Type'] == 'poi']
+    print(poi_nodes[0])
+    poi_graph = graph.subgraph(poi_nodes)
+    ranks = nx.pagerank(poi_graph)
+    poi_ranks = list()
+    for n, d in poi_graph.nodes(data=True):
+        poi_ranks.append((n, ranks[n], d))
+    sorted_poi_ranks = sorted(poi_ranks, reverse=True,
+                              key=lambda poi_rank: poi_rank[1])
+
+    print(poi_ranks)
+    max_rank = max(poi_ranks, key=lambda poi_rank: poi_rank[1])
+    min_rank = min(poi_ranks, key=lambda poi_rank: poi_rank[1])
+    step = (max_rank[1] - min_rank[1])/5.0
+    return (sorted_poi_ranks, min_rank, max_rank, step)
+
+
 def get_stats():
     graph = RidesGraph().create_rides_graph(Session())
     print("Is graph bipartite: {0}".format(nx.is_bipartite(graph)))
     # print_aggregated_degree_distribution(graph)
     # print_nodes_degree_distribution(graph)
-    print(get_average_neighbor_degree(graph))
+    # print(get_nodes_rank(graph))

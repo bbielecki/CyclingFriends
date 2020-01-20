@@ -4,7 +4,7 @@ import { useData } from './useData'
 import { BASE } from './App'
 
 export const Rides: React.FC<{}> = () => {
-    const data = useData(BASE + 'rides')
+    const { data } = useData(BASE + 'rides')
     return data.map((marker, index) => (
         <>
             <CircleMarker key={index + marker.StartLocation_Latitude}

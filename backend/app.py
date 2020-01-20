@@ -19,13 +19,13 @@ def hello_world():
     stats.get_stats()
     # print(pois.get_pois(10))
     # stats.get_stats()
-    bipartite.multiply_graph_nodes()
+    # bipartite.multiply_graph_nodes()
     return 'Hello World!'
 
 
 @app.route('/rides', )
 def get_rides():
-    res = rides.get_rides(100)
+    res = rides.get_rides(500)
     return jsonify(res)
 
 
@@ -38,6 +38,13 @@ def get_rides_graph():
 @app.route('/pois', )
 def get_pois():
     res = pois.get_pois()
+    return jsonify(res)
+
+
+@app.route('/pois/ranks')
+def get_pois_ranks():
+    graph = rides_graph.get_rides_graph()
+    res = stats.get_nodes_rank(graph)
     return jsonify(res)
 
 
