@@ -40,14 +40,16 @@ def calculate_mean_path_length(G):
 
 
 def print_aggregated_degree_distribution(G):
-    degree_sequence = sorted([(d, n) for n, d in G.degree()], reverse=True)  # degree sequence
+    degree_sequence = sorted(
+        [(d, n) for n, d in G.degree()], reverse=True)  # degree sequence
     intervals = [1 ** 1, 5 ** 1, 10 ** 1, 20 ** 1, 40 ** 1, 80 ** 1, 160, 320]
     degree_count = []
 
     for i in range(len(intervals)):
         min_int = intervals[i - 1] if i > 0 else 0
         max_int = intervals[i]
-        degree_count.append(sum(map(lambda n: min_int < n[0] < max_int, degree_sequence)))
+        degree_count.append(
+            sum(map(lambda n: min_int < n[0] < max_int, degree_sequence)))
 
     print(degree_count)
 
@@ -87,11 +89,12 @@ def print_aggregated_degree_distribution(G):
     #         most_popular_nodes[degree] = [node]
     #     else:
     #         most_popular_nodes[degree].append(node)
-        # print("Player: {0}, tags: {1}".format(degree_sequence[i].User.Id, degree_sequence[i][.Tags))
+    # print("Player: {0}, tags: {1}".format(degree_sequence[i].User.Id, degree_sequence[i][.Tags))
 
 
 def print_nodes_degree_distribution(G):
-    degree_sequence = sorted([d for n, d in G.degree()], reverse=False)  # degree sequence
+    degree_sequence = sorted([d for n, d in G.degree()],
+                             reverse=False)  # degree sequence
 
     mean = stats.mean(degree_sequence)
     median = stats.median(degree_sequence)
@@ -120,8 +123,30 @@ def print_nodes_degree_distribution(G):
     plt.show()
 
 
+def get_average_neighbor_degree(graph):
+    return nx.average_neighbor_degree(graph)
+
+
+def get_nodes_rank(graph):
+    poi_nodes = [n
+                 for n, d in graph.nodes(data=True) if d['Type'] == 'poi']
+    poi_graph = graph.subgraph(poi_nodes)
+    ranks = nx.pagerank(poi_graph)
+    poi_ranks = list()
+    for n, d in poi_graph.nodes(data=True):
+        poi_ranks.append((n, ranks[n], d))
+    sorted_poi_ranks = sorted(poi_ranks, reverse=True,
+                              key=lambda poi_rank: poi_rank[1])
+
+    max_rank = max(poi_ranks, key=lambda poi_rank: poi_rank[1])
+    min_rank = min(poi_ranks, key=lambda poi_rank: poi_rank[1])
+    step = (max_rank[1] - min_rank[1])/5.0
+    return (sorted_poi_ranks, min_rank, max_rank, step)
+
+
 def get_stats():
     graph = RidesGraph().create_rides_graph(Session())
     print("Is graph bipartite: {0}".format(nx.is_bipartite(graph)))
-    print_aggregated_degree_distribution(graph)
-    print_nodes_degree_distribution(graph)
+    # print_aggregated_degree_distribution(graph)
+    # print_nodes_degree_distribution(graph)
+    # print(get_nodes_rank(graph))
