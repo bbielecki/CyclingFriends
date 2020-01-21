@@ -130,7 +130,6 @@ def get_average_neighbor_degree(graph):
 def get_nodes_rank(graph):
     poi_nodes = [n
                  for n, d in graph.nodes(data=True) if d['Type'] == 'poi']
-    print(poi_nodes[0])
     poi_graph = graph.subgraph(poi_nodes)
     ranks = nx.pagerank(poi_graph)
     poi_ranks = list()
@@ -139,7 +138,6 @@ def get_nodes_rank(graph):
     sorted_poi_ranks = sorted(poi_ranks, reverse=True,
                               key=lambda poi_rank: poi_rank[1])
 
-    print(poi_ranks)
     max_rank = max(poi_ranks, key=lambda poi_rank: poi_rank[1])
     min_rank = min(poi_ranks, key=lambda poi_rank: poi_rank[1])
     step = (max_rank[1] - min_rank[1])/5.0

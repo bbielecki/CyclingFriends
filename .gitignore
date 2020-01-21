@@ -25,3 +25,4 @@ yarn-error.log
 cache
 .cache
 **/dist/
+users_correlation.txt

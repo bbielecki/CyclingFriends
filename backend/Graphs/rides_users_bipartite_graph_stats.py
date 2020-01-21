@@ -47,7 +47,8 @@ def multiply_graph_nodes():
 
 def analyze_bipartite_graph(graph, pois, users, gender: int = None, gender2: int = None, garmin: bool = None):
     graph_matrix = numpy.zeros((len(users), len(pois)))
-    print("matrix size: rows {0}, columns {1}".format(len(graph_matrix), len(graph_matrix[0])))
+    print("matrix size: rows {0}, columns {1}".format(
+        len(graph_matrix), len(graph_matrix[0])))
 
     i = 0
     for u in users:
@@ -83,19 +84,54 @@ def find_connected_users(bipartite, users, gender: int = None, gender2: int = No
                          (users[j][1]["UserGender"] == gender and users[i][1]["UserGender"] == gender2)):
                     if garmin is not None and \
                             (users[i][1]["UserHasGarmin"] == garmin and users[j][1]["UserHasGarmin"] == garmin):
-                        connected_users.append((users[i], users[j], bipartite[i][j]))
+                        connected_users.append(
+                            (users[i], users[j], bipartite[i][j]))
                     if garmin is None:
-                        connected_users.append((users[i], users[j], bipartite[i][j]))
+                        connected_users.append(
+                            (users[i], users[j], bipartite[i][j]))
 
                 if gender is None and gender2 is None:
                     if garmin is not None and \
                             (users[i][1]["UserHasGarmin"] == garmin and users[j][1]["UserHasGarmin"] == garmin):
-                        connected_users.append((users[i], users[j], bipartite[i][j]))
+                        connected_users.append(
+                            (users[i], users[j], bipartite[i][j]))
                     if garmin is None:
-                        connected_users.append((users[i], users[j], bipartite[i][j]))
+                        connected_users.append(
+                            (users[i], users[j], bipartite[i][j]))
             j += 1
 
     return connected_users
+
+
+def find_connected_pois(bipartite, users, gender: int = None, gender2: int = None, garmin: bool = None):
+    connected_pois = []
+
+    for i in range(bipartite.shape[1]):
+        j = i
+        while j < bipartite.shape[0]:
+            if bipartite[j][i] > 1:
+                if gender is not None and gender2 is not None and \
+                        ((users[i][1]["UserGender"] == gender and users[j][1]["UserGender"] == gender2) or
+                         (users[j][1]["UserGender"] == gender and users[i][1]["UserGender"] == gender2)):
+                    if garmin is not None and \
+                            (users[i][1]["UserHasGarmin"] == garmin and users[j][1]["UserHasGarmin"] == garmin):
+                        connected_pois.append(
+                            (users[i], users[j], bipartite[i][j]))
+                    if garmin is None:
+                        connected_pois.append(
+                            (users[i], users[j], bipartite[i][j]))
+
+                if gender is None and gender2 is None:
+                    if garmin is not None and \
+                            (users[i][1]["UserHasGarmin"] == garmin and users[j][1]["UserHasGarmin"] == garmin):
+                        connected_pois.append(
+                            (users[i], users[j], bipartite[i][j]))
+                    if garmin is None:
+                        connected_pois.append(
+                            (users[i], users[j], bipartite[i][j]))
+            j += 1
+
+    return connected_pois
 
 
 def print_connected_users_distribution(connected_users, max_connected,  gender: int = None, gender2: int = None, garmin: bool = None):
@@ -108,12 +144,11 @@ def print_connected_users_distribution(connected_users, max_connected,  gender: 
 
     fig, ax = plt.subplots()
     ax.plot(range(1, int(max_connected)), connections)
-    plt.title("Users meeting frequency {0} {1} {2}".format(gender, gender2, garmin))
+    plt.title("Users meeting frequency {0} {1} {2}".format(
+        gender, gender2, garmin))
     plt.ylabel("Pairs count")
     plt.xlabel("Number of meetings")
 
     ax.set_yscale('log')
 
     plt.show()
-
-
